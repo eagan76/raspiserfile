@@ -1,0 +1,15 @@
+[Unit]
+Description=Bluetooth Agent
+After=bluetooth.service
+Requires=bluetooth.service
+
+[Service]
+ExecStartPre=/usr/bin/bluetoothctl power on
+ExecStartPre=/usr/bin/bluetoothctl discoverable on
+ExecStartPre=/usr/bin/bluetoothctl pairable on
+ExecStart=/usr/bin/bt-agent -c NoInputNoOutput
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
